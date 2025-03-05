@@ -9,6 +9,10 @@ RESTful API for interacting with Apache ZooKeeper
 - `poetry run zk-proxy`
 - `http://localhost:8000/docs`
 
+## Docker
+- `docker build -t zk-proxy .`
+- `docker run -p 8000:8000 zk-proxy`
+
 ## Endpoints
 - `GET api/health`: Check if server is running & connected to ZooKeeper
 - `GET api/znode/v1`: Get root nodes
