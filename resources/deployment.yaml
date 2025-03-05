@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zk-rest-proxy
+  namespace: semoss
+  labels:
+    app: zk-rest-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zk-rest-proxy
+  template:
+    metadata:
+      labels:
+        app: zk-rest-proxy
+    spec:
+      containers:
+      - name: zk-rest-proxy
+        image: docker.semoss.org/genai/zookeeper-rest-proxy:2025-03-05-0329
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: ZK_HOSTS
+          value: "zookeeper-service.semoss.svc.cluster.local:2181"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+      imagePullSecrets:
+        - name: CHANGE-ME!!!
