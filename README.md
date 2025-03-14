@@ -2,19 +2,17 @@
 RESTful API for interacting with Apache ZooKeeper
 
 ## Installation
-- `poetry env activate`
-- `poetry install`
+- `uv pip install .`
 
 ## Usage
-- `poetry run zk-proxy`
-- `http://localhost:8000/docs`
+- `zk-proxy`
 
 ## Docker
 - `docker build -t zk-proxy .`
-- `docker run -p 8000:8000 zk-proxy`
+- `docker run -p 8989:8989 zk-proxy`
 
 ## Endpoints
-- `GET api/health`: Check if server is running & connected to ZooKeeper
-- `GET api/znode/v1`: Get root nodes
-- `GET api/znode/{path}`: Get node data or children
-- `HEAD api/znode/{path}`: Check if node exists
+- `GET /health`: Check if server is running & connected to ZooKeeper
+- `GET /znode/v1`: Get root nodes
+- `GET /znode/{path}`: Get node data or children
+- `HEAD /znode/{path}`: Check if node exists

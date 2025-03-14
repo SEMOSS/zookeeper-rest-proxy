@@ -119,3 +119,7 @@ dmypy.json
 *.sqlite3
 
 poetry.lock
+
+dir-strut.ps1
+directory_structure.txt
+uv.lock

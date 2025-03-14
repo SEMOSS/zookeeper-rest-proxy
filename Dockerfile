@@ -10,21 +10,20 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DEFAULT_TIMEOUT=100 \
     PYTHONPATH="/app/src"
 
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_CREATE=false \
-    POETRY_CACHE_DIR='/var/cache/pypoetry' \
-    POETRY_HOME='/usr/local' \
-    POETRY_VERSION=2.1.1
+
+ENV UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_SYSTEM_PYTHON=1
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml /app/
+COPY src ./src
+COPY pyproject.toml README.md ./
 
-RUN poetry install --no-interaction --no-ansi --no-root
-
-COPY . .
+RUN uv pip install -r pyproject.toml
 
 RUN adduser --disabled-password --gecos "" appuser && \
     chown -R appuser:appuser /app

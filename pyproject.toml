@@ -3,24 +3,20 @@ name = "zookeeper-rest-proxy"
 version = "0.1.0"
 description = "RESTful API for interacting with Apache ZooKeeper"
 authors = [
-    {name = "Ryan Weiler",email = "ryanweiler92@gmail.com"}
+    {name = "Ryan Weiler", email = "ryanweiler92@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi[standard] (>=0.115.11,<0.116.0)",
-    "kazoo (>=2.10.0,<3.0.0)",
-    "pydantic (>=2.10.6,<3.0.0)",
-    "pydantic-settings (>=2.8.1,<3.0.0)"
+    "fastapi[standard]>=0.115.11",
+    "kazoo>=2.10.0",
+    "pydantic>=2.10.6",
+    "pydantic-settings>=2.8.1",
 ]
 
-[tool.poetry]
-packages = [{include = "zookeeper_rest_proxy", from = "src"}]
-
-
-[tool.poetry.scripts]
+[project.scripts]
 zk-proxy = "zookeeper_rest_proxy.main:start"
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["zookeeper_rest_proxy"]

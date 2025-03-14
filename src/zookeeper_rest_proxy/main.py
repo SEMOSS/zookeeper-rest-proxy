@@ -45,8 +45,8 @@ app.add_middleware(
 )
 
 
-app.include_router(health_route, prefix="/api")
-app.include_router(zk_route, prefix="/api")
+app.include_router(health_route)
+app.include_router(zk_route)
 
 
 @app.get("/")
